@@ -16,8 +16,9 @@ cleanup() {
 # to apply this patch:
 # git am -3 --exclude=Cargo.lock --exclude=enclave-runtime/Cargo.lock < upstream.patch
 
-UPSTREAM="https://github.com/zTgx/upstream.git"
+UPSTREAM="git@github.com:zTgx/upstream.git"
 ROOTDIR=$(git rev-parse --show-toplevel)
+echo "$ROOTDIR"
 cd "$ROOTDIR"
 
 if [ -f upstream_commit ]; then
@@ -26,6 +27,8 @@ else
   echo "Can't find upstream_commit file, quit"
   exit 1
 fi
+
+echo "$OLD_COMMIT"
 
 if [ "$(git remote get-url upstream 2>/dev/null)" != "$UPSTREAM" ]; then
   echo "please set your upstream origin to $UPSTREAM"
